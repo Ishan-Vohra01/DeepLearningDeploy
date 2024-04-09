@@ -11,7 +11,7 @@ class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
 # Function to predict the class label
 def predict(image_path):
-    img_width, img_height = 224, 224  # Assuming the dimensions used during training
+    img_width, img_height = 48, 48  # Assuming the dimensions used during training
     img = image.load_img(image_path, target_size=(img_width, img_height))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)  # Reshape to (1, img_width, img_height, 3)
