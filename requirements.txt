@@ -1,6 +1,6 @@
 streamlit==0.86.0
-keras==2.6.0
-tensorflow==2.6.0
+keras==2.15.0
+tensorflow==2.15.0
 numpy==1.19.2
 pickle-mixin==1.0.2
 streamlit==1.2.0
