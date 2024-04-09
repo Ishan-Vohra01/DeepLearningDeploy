@@ -3,7 +3,18 @@ import numpy as np
 from keras.preprocessing import image
 from keras.models import load_model
 
-# Load the pre-trained model
+# sidebar for navigation
+with st.sidebar:
+    
+    selected = option_menu('DeepLearning Deployment',
+                          
+                          ['CNN','VAE'],
+                          default_index=0)
+    
+if (selected == 'CNN'):
+        # page title
+    st.title('CNN')
+    # Load the pre-trained model
 model = load_model("emotion_detection_model.h5")
 
 # Define class labels
@@ -41,3 +52,6 @@ if uploaded_file is not None:
         
         # Display predicted class label
         st.success(f"Predicted class label: {prediction}")
+
+
+
