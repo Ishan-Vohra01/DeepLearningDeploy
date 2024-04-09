@@ -3,5 +3,5 @@ keras==2.15.0
 tensorflow==2.15.0
 numpy==1.25.2
 streamlit-option-menu==0.3.2
-OpenCV==4.8.0
+OpenCV==4.7.0
 Pillow==9.4.0
