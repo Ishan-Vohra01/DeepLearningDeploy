@@ -59,32 +59,31 @@ if uploaded_file is not None:
         st.success(f"Predicted class label: {prediction}")
         
 
-elif selected == 'EfficientNet Unfreezing':
-    # Load the model
+elif (selected == 'EfficientNet Unfreezing'):
+       # Load the model
     model = load_model("my_model.h5")  # Update with your model path
-
+    
     class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
-
+    
     st.title("Image Classification App")
     st.write("Upload an image and get its predicted class.")
-
+    
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
-
+    
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         st.image(image, caption="Uploaded Image.", use_column_width=True)
-
+        
         # Preprocess the image
-        image = image.resize((64, 64))  # Resize the image using Pillow
-        image = image.convert("RGB")  # Ensure it's in RGB format
-        image = image.img_to_array(image)
+        image = img.img_to_array(image)
+        image = cv2.resize(image, (64, 64))
         image = np.expand_dims(image, axis=0)
         image = preprocess_input(image)
-
+        
         # Make prediction
         prediction = model.predict(image)
         predicted_class = np.argmax(prediction)
         predicted_label = class_labels[predicted_class]
-
+        
         st.write("Predicted Class:", predicted_label)
         st.write("Confidence:", prediction[0][predicted_class])
