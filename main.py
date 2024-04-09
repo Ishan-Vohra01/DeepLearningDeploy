@@ -3,7 +3,6 @@ import numpy as np
 from streamlit_option_menu import option_menu
 from keras.preprocessing import image
 from keras.models import load_model
-import cv2
 from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.image import resize
 from PIL import Image
@@ -58,32 +57,3 @@ if uploaded_file is not None:
         # Display predicted class label
         st.success(f"Predicted class label: {prediction}")
         
-
-elif (selected == 'EfficientNet Unfreezing'):
-       # Load the model
-    model = load_model("my_model.h5")  # Update with your model path
-    
-    class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
-    
-    st.title("Image Classification App")
-    st.write("Upload an image and get its predicted class.")
-    
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
-    
-    if uploaded_file is not None:
-        image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image.", use_column_width=True)
-        
-        # Preprocess the image
-        image = img.img_to_array(image)
-        image = cv2.resize(image, (64, 64))
-        image = np.expand_dims(image, axis=0)
-        image = preprocess_input(image)
-        
-        # Make prediction
-        prediction = model.predict(image)
-        predicted_class = np.argmax(prediction)
-        predicted_label = class_labels[predicted_class]
-        
-        st.write("Predicted Class:", predicted_label)
-        st.write("Confidence:", prediction[0][predicted_class])
