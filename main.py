@@ -15,45 +15,136 @@ with st.sidebar:
                           ['CNN','EfficientNet Unfreezing','VAE','DC GAN'],
                           default_index=0)
     
+
 if (selected == 'CNN'):
-        # page title
+
     st.title('CNN')
-    # Load the pre-trained model
 model = load_model("CNN.h5")
 
-# Define class labels
 class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-# Function to predict the class label
 def predict(image_path):
-    img_width, img_height = 48, 48  # Assuming the dimensions used during training
+    img_width, img_height = 48, 48
     img = image.load_img(image_path, target_size=(img_width, img_height))
     img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)  # Reshape to (1, img_width, img_height, 3)
-    img_array /= 255.0  # Normalize the image
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array /= 255.0
     prediction = model.predict(img_array)
     predicted_class = np.argmax(prediction)
     return class_labels[predicted_class]
 
-# Streamlit UI
 st.title('Image Classification')
 st.write('Upload an image for classification')
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Display the uploaded image
     st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
     
-    # Perform prediction when 'Predict' button is clicked
     if st.button('Predict'):
-        # Save the uploaded file to a temporary location
         with open("temp_image.jpg", "wb") as f:
             f.write(uploaded_file.getvalue())
         
-        # Get prediction
         prediction = predict("temp_image.jpg")
         
-        # Display predicted class label
+        st.success(f"Predicted class label: {prediction}")
+
+if (selected == 'EfficientNet Unfreezing'):
+
+model = load_model("Efficent_net.h5")
+
+class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
+
+def predict(image_path):
+    img_width, img_height = 48, 48
+    img = image.load_img(image_path, target_size=(img_width, img_height))
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array /= 255.0
+    prediction = model.predict(img_array)
+    predicted_class = np.argmax(prediction)
+    return class_labels[predicted_class]
+
+st.title('Image Classification')
+st.write('Upload an image for classification')
+
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
+    
+    if st.button('Predict'):
+        with open("temp_image.jpg", "wb") as f:
+            f.write(uploaded_file.getvalue())
+        
+        prediction = predict("temp_image.jpg")
+        
+        st.success(f"Predicted class label: {prediction}")
+        
+
+if (selected == 'VAE'):
+
+model = load_model("vae_model.h5")
+
+class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
+
+def predict(image_path):
+    img_width, img_height = 48, 48
+    img = image.load_img(image_path, target_size=(img_width, img_height))
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array /= 255.0
+    prediction = model.predict(img_array)
+    predicted_class = np.argmax(prediction)
+    return class_labels[predicted_class]
+
+st.title('Image Classification')
+st.write('Upload an image for classification')
+
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
+    
+    if st.button('Predict'):
+        with open("temp_image.jpg", "wb") as f:
+            f.write(uploaded_file.getvalue())
+        
+        prediction = predict("temp_image.jpg")
+        
+        st.success(f"Predicted class label: {prediction}")
+                
+
+
+if (selected == 'DC GAN'):
+
+model = load_model("discriminator_weights.h5")
+
+class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
+
+def predict(image_path):
+    img_width, img_height = 48, 48
+    img = image.load_img(image_path, target_size=(img_width, img_height))
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array /= 255.0
+    prediction = model.predict(img_array)
+    predicted_class = np.argmax(prediction)
+    return class_labels[predicted_class]
+
+st.title('Image Classification')
+st.write('Upload an image for classification')
+
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
+    
+    if st.button('Predict'):
+        with open("temp_image.jpg", "wb") as f:
+            f.write(uploaded_file.getvalue())
+        
+        prediction = predict("temp_image.jpg")
+        
         st.success(f"Predicted class label: {prediction}")
         
