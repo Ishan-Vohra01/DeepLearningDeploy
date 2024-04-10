@@ -19,7 +19,7 @@ if (selected == 'CNN'):
         # page title
     st.title('CNN')
     # Load the pre-trained model
-model = load_model("emotion_detection_model.h5")
+model = load_model("CNN.h5")
 
 # Define class labels
 class_labels = ['Ahegao', 'Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
