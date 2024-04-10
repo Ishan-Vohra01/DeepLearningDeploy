@@ -12,7 +12,7 @@ with st.sidebar:
     
     selected = option_menu('DeepLearning Deployment',
                           
-                          ['CNN','EfficientNet Unfreezing'],
+                          ['CNN','EfficientNet Unfreezing','VGG','VAE','AC GAN'],
                           default_index=0)
     
 if (selected == 'CNN'):
